@@ -1,0 +1,199 @@
+import React, { useState } from 'react'
+import { motion } from 'framer-motion'
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Button } from "@/components/ui/button"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { ChevronLeft, ChevronRight, Instagram, Facebook, Youtube, ArrowUp, Music } from 'lucide-react'
+
+export default function Component() {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const images = [
+    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/5-NxdUouZCuIcOEjQOsW77x9pnGKJPnQ.JPG",
+    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/6-de443YyYNWMFj8E0sqzhUule1UIJgt.JPG",
+    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/7-7KKB0XwKVvBJg2BfVozdu4SrCTWQX4.JPG",
+    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/8-fqRWTcTmbThIBYYsMZNa4OeMbIbzZL.JPG",
+    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/10-6I9w6C9GuBYCFPnUYrApkX8dFF17la.JPG"
+  ]
+
+  const [visualizaciones, setVisualizaciones] = useState("2.3M")
+  const [visualizacionesGrowth, setVisualizacionesGrowth] = useState("19.3%")
+  const [interacciones, setInteracciones] = useState("169K")
+  const [seguidores, setSeguidores] = useState("53K")
+  const [seguidoresGrowth, setSeguidoresGrowth] = useState("0.3%")
+  const [contenidos, setContenidos] = useState("254")
+  const [tiktokVisualizaciones, setTiktokVisualizaciones] = useState("34K")
+  const [tiktokVisualizacionesGrowth, setTiktokVisualizacionesGrowth] = useState("19.3%")
+  const [tiktokLikes, setTiktokLikes] = useState("2,928")
+  const [tiktokLikesGrowth, setTiktokLikesGrowth] = useState("21.9%")
+  const [tiktokNuevosSeguidores, setTiktokNuevosSeguidores] = useState("88")
+  const [tiktokNuevosSeguidoresGrowth, setTiktokNuevosSeguidoresGrowth] = useState("0.3%")
+
+
+  const nextImage = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length)
+  }
+
+  const prevImage = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length)
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-amber-100 to-rose-100 p-4 md:p-8">
+      <Card className="max-w-6xl mx-auto mb-8">
+        <CardHeader className="text-center">
+          <Avatar className="w-32 h-32 mx-auto mb-4">
+            <AvatarImage src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1-N8n7VDtT4QXwuebGx8EVmCSS9oaL14.JPG" alt="Mariana Rosas" />
+            <AvatarFallback>MR</AvatarFallback>
+          </Avatar>
+          <CardTitle className="text-3xl font-bold">Mariana Rosas</CardTitle>
+          <p className="text-gray-500">Modelo | Influencer | Creadora de Contenido</p>
+          <div className="flex justify-center space-x-4 mt-4">
+            <Button variant="outline" size="icon" asChild>
+              <a href="https://www.instagram.com/rosasmariana2/profilecard/?igsh=amN0Mm03djUwcm1y" target="_blank" rel="noopener noreferrer">
+                <Instagram className="h-4 w-4" />
+              </a>
+            </Button>
+            <Button variant="outline" size="icon" asChild>
+              <a href="https://www.tiktok.com/@rosasmariana2?_t=8qq8Qb9jBzB&_r=1" target="_blank" rel="noopener noreferrer">
+                <Music className="h-4 w-4" />
+              </a>
+            </Button>
+            <Button variant="outline" size="icon" asChild>
+              <a href="https://youtube.com/@marianarosas2796?si=qabRuFj5z6JHDH6z" target="_blank" rel="noopener noreferrer">
+                <Youtube className="h-4 w-4" />
+              </a>
+            </Button>
+            <Button variant="outline" size="icon" asChild>
+              <a href="https://www.facebook.com/share/a5kNb6pahcikoMgY/?mibextid=JRoKGi" target="_blank" rel="noopener noreferrer">
+                <Facebook className="h-4 w-4" />
+              </a>
+            </Button>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <Tabs defaultValue="stats" className="w-full">
+            <TabsList className="grid w-full grid-cols-4">
+              <TabsTrigger value="stats">Estadísticas</TabsTrigger>
+              <TabsTrigger value="portfolio">Portafolio</TabsTrigger>
+              <TabsTrigger value="content">Contenido</TabsTrigger>
+              <TabsTrigger value="contact">Contacto</TabsTrigger>
+            </TabsList>
+            <TabsContent value="stats">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+                <StatCard title="Visualizaciones" value={visualizaciones} growth={visualizacionesGrowth} />
+                <StatCard title="Interacciones" value={interacciones} />
+                <StatCard title="Seguidores" value={seguidores} growth={seguidoresGrowth} />
+                <StatCard title="Contenidos" value={contenidos} />
+              </div>
+              <h3 className="text-xl font-semibold mt-8 mb-4">Métricas TikTok</h3>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                <StatCard title="Visualizaciones" value={tiktokVisualizaciones} growth={tiktokVisualizacionesGrowth} />
+                <StatCard title="Me gusta" value={tiktokLikes} growth={tiktokLikesGrowth} />
+                <StatCard title="Nuevos Seguidores" value={tiktokNuevosSeguidores} growth={tiktokNuevosSeguidoresGrowth} />
+              </div>
+            </TabsContent>
+            <TabsContent value="portfolio">
+              <div className="relative aspect-video mb-8">
+                <motion.img
+                  key={currentImageIndex}
+                  src={images[currentImageIndex]}
+                  alt={`Mariana Rosas - Imagen ${currentImageIndex + 1}`}
+                  className="w-full h-full object-cover rounded-lg shadow-lg"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                />
+                <button
+                  onClick={prevImage}
+                  className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 rounded-full p-2 hover:bg-opacity-75 transition-all"
+                  aria-label="Imagen anterior"
+                >
+                  <ChevronLeft size={24} />
+                </button>
+                <button
+                  onClick={nextImage}
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 rounded-full p-2 hover:bg-opacity-75 transition-all"
+                  aria-label="Siguiente imagen"
+                >
+                  <ChevronRight size={24} />
+                </button>
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {images.map((img, index) => (
+                  <motion.img
+                    key={index}
+                    src={img}
+                    alt={`Mariana Rosas - Miniatura ${index + 1}`}
+                    className="w-full h-40 object-cover rounded-lg shadow-md cursor-pointer"
+                    whileHover={{ scale: 1.05 }}
+                    onClick={() => setCurrentImageIndex(index)}
+                  />
+                ))}
+              </div>
+            </TabsContent>
+            <TabsContent value="content">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                <ContentCard
+                  icon={<Youtube className="h-8 w-8" />}
+                  title="Contenido Audiovisual"
+                  description="Creación de contenido original y entretenido para múltiples plataformas"
+                />
+                <ContentCard
+                  icon={<Music className="h-8 w-8" />}
+                  title="Marketing Digital"
+                  description="Estrategias efectivas de comunicación en redes sociales"
+                />
+                <ContentCard
+                  icon={<Instagram className="h-8 w-8" />}
+                  title="Comunidad"
+                  description="Construcción y gestión de comunidades digitales activas"
+                />
+              </div>
+            </TabsContent>
+            <TabsContent value="contact">
+              <div className="text-center mt-4">
+                <h3 className="text-xl font-semibold mb-2">Contacto Profesional</h3>
+                <p>Para colaboraciones y propuestas comerciales:</p>
+                <p className="font-bold mt-2">Email: contacto@marianarosas.com</p>
+                <p className="font-bold">Management: representante@marianarosas.com</p>
+              </div>
+            </TabsContent>
+          </Tabs>
+        </CardContent>
+      </Card>
+      <footer className="text-center text-gray-600">
+        <p>© 2024 Mariana Rosas. Todos los derechos reservados.</p>
+      </footer>
+    </div>
+  )
+}
+
+function StatCard({ title, value, growth }: { title: string; value: string; growth?: string }) {
+  return (
+    <Card>
+      <CardContent className="p-4">
+        <p className="text-sm text-gray-500">{title}</p>
+        <p className="text-2xl font-bold">{value}</p>
+        {growth && (
+          <p className="text-sm text-green-600 flex items-center">
+            <ArrowUp className="h-4 w-4 mr-1" />
+            {growth}
+          </p>
+        )}
+      </CardContent>
+    </Card>
+  )
+}
+
+function ContentCard({ icon, title, description }: { icon: React.ReactNode; title: string; description: string }) {
+  return (
+    <Card>
+      <CardContent className="p-4 text-center">
+        <div className="mb-2">{icon}</div>
+        <h4 className="font-semibold mb-2">{title}</h4>
+        <p className="text-sm text-gray-500">{description}</p>
+      </CardContent>
+    </Card>
+  )
+}
